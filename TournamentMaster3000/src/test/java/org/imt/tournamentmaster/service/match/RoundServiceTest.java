@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+// TODO-08 : Comme RoundService a légèrement changé, il faut adapter les tests
 @SpringBootTest
 public class RoundServiceTest {
 

@@ -6,6 +6,7 @@ import org.imt.tournamentmaster.model.equipe.Equipe;
 import java.util.List;
 import java.util.Objects;
 
+// Quand cette classe est transformée en entité, il faut spécifier le nom de la table en `match` en incluant les backquotes ` car match est un mot-clé réservé en SQL
 public class Match {
 
     @JsonIgnore
