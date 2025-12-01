@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-// TODO-08 : Comme RoundService a légèrement changé, il faut adapter les tests
 @SpringBootTest
 public class RoundServiceTest {
 
@@ -17,7 +16,7 @@ public class RoundServiceTest {
 
     @Test
     public void testGetRoundById() {
-        Round round1 = roundService.getById(1L);
+        Round round1 = roundService.getById(1L).orElseThrow();
 
         // assert
         Assertions.assertNotNull(round1);
@@ -26,7 +25,7 @@ public class RoundServiceTest {
         Assertions.assertEquals(14, round1.getScoreB());
         Assertions.assertEquals(1, round1.getRoundNumber());
 
-        Round round2 = roundService.getById(2L);
+        Round round2 = roundService.getById(2L).orElseThrow();
 
         // assert
         Assertions.assertNotNull(round2);
@@ -35,7 +34,7 @@ public class RoundServiceTest {
         Assertions.assertEquals(21, round2.getScoreB());
         Assertions.assertEquals(2, round2.getRoundNumber());
 
-        Round round3 = roundService.getById(3L);
+        Round round3 = roundService.getById(3L).orElseThrow();
 
         // assert
         Assertions.assertNotNull(round3);
@@ -47,10 +46,8 @@ public class RoundServiceTest {
 
     @Test
     public void testGetNonExistingRoundById_shouldBeNull() {
-        Round round = roundService.getById(42L);
-
         // assert
-        Assertions.assertNull(round);
+        Assertions.assertTrue(roundService.getById(42L).isEmpty());
     }
 
     @Test
@@ -59,6 +56,6 @@ public class RoundServiceTest {
 
         // assert
         Assertions.assertNotNull(rounds);
-        Assertions.assertEquals(3, rounds.size());
+        Assertions.assertEquals(6, rounds.size());
     }
 }

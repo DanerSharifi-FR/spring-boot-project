@@ -6,11 +6,11 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+@Entity
 public class Round {
 
-    // TODO-00 : Convertir cette classe en entité avec l'annotation @Entity et d'autres annotations appropriées sur ses attributs
-
     @JsonIgnore
+    @Id
     private long id;
 
     private int scoreA;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @SpringBootTest
 public class MatchRepositoryTest {
@@ -20,7 +21,7 @@ public class MatchRepositoryTest {
     @Test
     public void testFindById() {
         // find a match
-        Match match = matchRepository.findById(1L);
+        Match match = matchRepository.findById(1L).get();
 
         // assert
         Assertions.assertNotNull(match);
@@ -43,11 +44,11 @@ public class MatchRepositoryTest {
     @Test
     public void testFindAll() {
         // find all matchs
-        List<Match> matchs = matchRepository.findAll();
+        List<Match> matchs = StreamSupport.stream(matchRepository.findAll().spliterator(), false).toList();
 
         // assert
         Assertions.assertNotNull(matchs);
-        Assertions.assertEquals(1, matchs.size());
+        Assertions.assertEquals(2, matchs.size());
     }
 
 }

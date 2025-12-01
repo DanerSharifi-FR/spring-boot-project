@@ -1,10 +1,22 @@
 package org.imt.tournamentmaster.repository.match;
 
 import org.imt.tournamentmaster.model.match.Round;
-import org.imt.tournamentmaster.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-// TODO-01 : Transformer cette interface en CrudRepository et l'injecter dans le contexte de beans Spring
-public interface RoundRepository extends Repository<Round> {
+import java.util.List;
 
-    // TODO-11 BONUS : Créer une méthode (de votre choix) en utilisant le mécanisme JPA et exposer son résultat par API REST  https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+@Repository
+public interface RoundRepository extends CrudRepository<Round, Long> {
+
+    /**
+     * Requête implémentée par <a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html">JPA</a>
+     * Ici on utilise le format de nommage pour que ça corresponde au SQL suivant :
+     * <pre>SELECT * FROM round WHERE scoreA >= :scoreA</pre>
+     *
+     * Astuce : on peut s'affranchir de ce mécanisme et écrire du sql via les annotations @Query et @NativeQuery <a href="https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html">(javadoc)</a>
+     * A savoir : le langage par défaut est du JPQL (Java Persistence Query Language) qui est un langage de requête orienté objet
+     * Pour faire du sql classique, il faut passer par des Native Query
+     */
+    List<Round> findByScoreAGreaterThanEqual(int scoreA);
 }

@@ -4,8 +4,11 @@ import org.imt.tournamentmaster.model.match.Match;
 import org.imt.tournamentmaster.repository.match.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MatchService {
@@ -17,11 +20,14 @@ public class MatchService {
         this.matchRepository = matchRepository;
     }
 
-    public Match getById(int id) {
+    @Transactional(readOnly = true)
+    public Optional<Match> getById(long id) {
         return matchRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public List<Match> getAll() {
-        return matchRepository.findAll();
+        return StreamSupport.stream(matchRepository.findAll().spliterator(), false)
+                .toList();
     }
 }

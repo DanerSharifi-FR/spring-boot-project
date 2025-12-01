@@ -1,11 +1,13 @@
 package org.imt.tournamentmaster.controller.match;
 
 import org.imt.tournamentmaster.model.match.Match;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.imt.tournamentmaster.service.match.MatchService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/match")
@@ -19,8 +21,11 @@ public class MatchController {
     }
 
     @GetMapping("/{id}")
-    public Match getById(@PathVariable int id) {
-        return matchService.getById(id);
+    public ResponseEntity<Match> getById(@PathVariable long id) {
+        Optional<Match> match = matchService.getById(id);
+
+        return match.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
