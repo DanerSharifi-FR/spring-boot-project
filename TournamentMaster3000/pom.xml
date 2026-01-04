@@ -14,30 +14,6 @@
         <version>4.0.0</version>
     </parent>
 
-    <!-- TODO-01 Ajouter la dépendance de Spring Boot Security  -->
-    <!-- TODO-02a Créer une classe de configuration "SecurityConfiguration" pour créer les beans SecurityFilterChain et InMemoryUserDetailsManager -->
-    <!-- TODO-02b SecurityFilterChain :
-        - Les GET sur /api/** sont autorisés pour les utilisateurs avec un rôle USER et ADMIN
-        - Toutes les autres requêtes sur /api/** sont autorisées pour les utilisateurs avec un rôle ADMIN uniquement
-        - Toutes les autres requêtes sont autorisées pour tout le monde
-        - Activer l'authentification "Basic" -->
-    <!-- TODO-02c InMemoryUserDetailsManager :
-        - Doit initialiser un utilisateur "user" avec le rôle USER
-        - Doit initialiser un utilisateur "admin" avec le rôle ADMIN
-        - Ne pas oublier d'encoder le mot de passe -->
-    <!-- TODO-03 Tester depuis le navigateur les règles mises en place :
-        - Aller sur http://localhost:8080/api/equipe doit vous ouvrir une pop-up navigateur pour saisir un user / mot de passe
-        - Tester un POST sur swagger avec un user non ADMIN, ça doit échouer avec un 403
-        - Pour changer de user, vous pouvez utiliser une fenêtre de navigation privée -->
-    <!-- TODO-04 Prendre connaissance de la classe CompteControllerTest puis :
-        - Créer une classe CompteController avec la bonne configuration Spring et les deux endpoints testés
-        - Utiliser l'annotation @PreAuthorize pour sécuriser les endpoints pour faire passer les cas de tests
-            - Contrainte 1 : /whoami doit fonctionner pour n'importe quel utilisateur (il existe une méthode isAuthenticated() disponible en SpEL)
-            - Contrainte 2 : /secret ne doit fonctionner que pour l'utilisateur avec le rôle ADMIN et qui s'appelle 'admin' (regarder les slides pour voir comment on fait en SpEL)
-        - Ne pas oublier d'activer la sécurité sur les méthodes
-        - Compléter les tests pour passer les bons utilisateurs en authentification Basic (utiliser la méthode getBasicAuthHeader de la classe de test) -->
-    <!-- TODO-05 Tester sur swagger / navigateur que votre nouveau controller est bien sécurisé -->
-
     <dependencies>
 
         <dependency>
@@ -54,6 +30,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>
@@ -78,11 +59,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-resttestclient</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
