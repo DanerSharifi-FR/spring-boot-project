@@ -57,6 +57,14 @@ CREATE TABLE match_round
     round_id BIGINT NOT NULL
 );
 
+-- resultat
+CREATE TABLE resultat
+(
+    id       BIGINT NOT NULL,
+    match_id BIGINT NOT NULL,
+    CONSTRAINT pk_resultat PRIMARY KEY (id)
+);
+
 ALTER TABLE match_round
     ADD CONSTRAINT uc_match_rounds_rounds UNIQUE (round_id);
 
@@ -71,3 +79,6 @@ ALTER TABLE match_round
 
 ALTER TABLE match_round
     ADD CONSTRAINT fk_matrou_on_round FOREIGN KEY (round_id) REFERENCES round (id);
+
+ALTER TABLE resultat
+    ADD CONSTRAINT fk_resultat_on_match FOREIGN KEY (match_id) REFERENCES `match` (id);
