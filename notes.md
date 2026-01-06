@@ -12,3 +12,70 @@
 `/actuator/env` : variables d’environnement et propriétés
 `/actuator/beans` : liste des beans Spring chargés
 `/actuator/loggers` : niveau de logs à chaud
+
+---
+
+| Annotation | Catégorie | Rôle | Exemple |
+|-----------|----------|------|---------|
+| @SpringBootApplication | Configuration | Point d’entrée d’une appli Spring Boot (combine @Configuration, @EnableAutoConfiguration, @ComponentScan) | `@SpringBootApplication public class App {}` |
+| @Autowired | Injection de dépendances | Injecte automatiquement un bean Spring | `@Autowired private UserService userService;` |
+| @Component | Stéréotype | Déclare une classe comme bean Spring | `@Component public class MyComponent {}` |
+| @Service | Stéréotype | Bean de couche métier (service) | `@Service public class UserService {}` |
+| @Repository | Stéréotype | Bean de couche accès données (DAO) | `@Repository public class UserRepository {}` |
+| @Controller | Web MVC | Contrôleur MVC (retourne des vues) | `@Controller public class UserController {}` |
+| @RestController | Web REST | Contrôleur REST (`@Controller + @ResponseBody`) | `@RestController public class UserController {}` |
+| @RequestMapping | Web REST | Mappe une requête HTTP (tous verbes) | `@RequestMapping("/users")` |
+| @GetMapping | Web REST | Mappe une requête GET | `@GetMapping("/{id}")` |
+| @PostMapping | Web REST | Mappe une requête POST | `@PostMapping` |
+| @PutMapping | Web REST | Mappe une requête PUT | `@PutMapping` |
+| @DeleteMapping | Web REST | Mappe une requête DELETE | `@DeleteMapping` |
+| @PathVariable | Web REST | Récupère une variable d’URL | `@PathVariable Long id` |
+| @RequestParam | Web REST | Récupère un paramètre de requête | `@RequestParam String name` |
+| @RequestBody | Web REST | Mappe le body HTTP vers un objet | `@RequestBody User user` |
+| @ResponseStatus | Web REST | Définit le code HTTP de la réponse | `@ResponseStatus(HttpStatus.CREATED)` |
+| @Configuration | Configuration | Classe de configuration Spring | `@Configuration public class AppConfig {}` |
+| @Bean | Configuration | Déclare un bean manuellement | `@Bean public ModelMapper mapper()` |
+| @Value | Configuration | Injecte une propriété | `@Value("${app.name}")` |
+| @Profile | Configuration | Active un bean selon l’environnement | `@Profile("dev")` |
+| @Entity | JPA | Entité persistée en base | `@Entity class User {}` |
+| @Id | JPA | Clé primaire | `@Id private Long id;` |
+| @GeneratedValue | JPA | Génération auto de l’ID | `@GeneratedValue` |
+| @Table | JPA | Nom de table | `@Table(name="users")` |
+| @Column | JPA | Colonne de table | `@Column(nullable=false)` |
+| @Transactional | Transaction | Gère les transactions | `@Transactional public void save()` |
+| @EnableScheduling | Scheduling | Active les tâches planifiées | `@EnableScheduling` |
+| @Scheduled | Scheduling | Tâche planifiée | `@Scheduled(fixedRate=5000)` |
+| @EnableCaching | Cache | Active le cache | `@EnableCaching` |
+| @Cacheable | Cache | Met en cache une méthode | `@Cacheable("users")` |
+| Annotation | Catégorie | Rôle | Exemple |
+|-----------|----------|------|---------|
+| @SpringBootApplication | Configuration | Point d’entrée d’une appli Spring Boot (combine @Configuration, @EnableAutoConfiguration, @ComponentScan) | `@SpringBootApplication public class App {}` |
+| @Autowired | Injection de dépendances | Injecte automatiquement un bean Spring | `@Autowired private UserService userService;` |
+| @Component | Stéréotype | Déclare une classe comme bean Spring | `@Component public class MyComponent {}` |
+| @Service | Stéréotype | Bean de couche métier (service) | `@Service public class UserService {}` |
+| @Repository | Stéréotype | Bean de couche accès données (DAO) | `@Repository public class UserRepository {}` |
+| @Controller | Web MVC | Contrôleur MVC (retourne des vues) | `@Controller public class UserController {}` |
+| @RestController | Web REST | Contrôleur REST (`@Controller + @ResponseBody`) | `@RestController public class UserController {}` |
+| @RequestMapping | Web REST | Mappe une requête HTTP (tous verbes) | `@RequestMapping("/users")` |
+| @GetMapping | Web REST | Mappe une requête GET | `@GetMapping("/{id}")` |
+| @PostMapping | Web REST | Mappe une requête POST | `@PostMapping` |
+| @PutMapping | Web REST | Mappe une requête PUT | `@PutMapping` |
+| @DeleteMapping | Web REST | Mappe une requête DELETE | `@DeleteMapping` |
+| @PathVariable | Web REST | Récupère une variable d’URL | `@PathVariable Long id` |
+| @RequestParam | Web REST | Récupère un paramètre de requête | `@RequestParam String name` |
+| @RequestBody | Web REST | Mappe le body HTTP vers un objet | `@RequestBody User user` |
+| @ResponseStatus | Web REST | Définit le code HTTP de la réponse | `@ResponseStatus(HttpStatus.CREATED)` |
+| @Configuration | Configuration | Classe de configuration Spring | `@Configuration public class AppConfig {}` |
+| @Bean | Configuration | Déclare un bean manuellement | `@Bean public ModelMapper mapper()` |
+| @Value | Configuration | Injecte une propriété | `@Value("${app.name}")` |
+| @Profile | Configuration | Active un bean selon l’environnement | `@Profile("dev")` |
+| @Entity | JPA | Entité persistée en base | `@Entity class User {}` |
+| @Id | JPA | Clé primaire | `@Id private Long id;` |
+| @GeneratedValue | JPA | Génération auto de l’ID | `@GeneratedValue` |
+| @Table | JPA | Nom de table | `@Table(name="users")` |
+| @Column | JPA | Colonne de table | `@Column(nullable=false)` |
+| @Transactional | Transaction | Gère les transactions | `@Transactional public void save()` |
+| @EnableScheduling | Scheduling | Active les tâches planifiées | `@EnableScheduling` |
+| @Scheduled | Scheduling | Tâche planifiée | `@Scheduled(fixedRate=5000)` |
+| @EnableCaching | Cache | Active le cache | `@EnableCaching` |
+| @Cacheable | Cache | Met en cache une méthode | `@Cacheable("users")` |
