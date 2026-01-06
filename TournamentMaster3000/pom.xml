@@ -14,8 +14,6 @@
         <version>4.0.0</version>
     </parent>
 
-    <!-- TODO-01 Ajouter la dépendance à Spring Boot Actuator -->
-    <!-- TODO-02 Aller sur http://localhost:8080/actuator/health et vérifier qu'on a bien UP -->
     <!-- TODO-03 Activer les détails du endpoint /health, relancer l'application et rafraîchir le navigateur. Prendre connaissance de ce qui s'affiche en plus -->
     <!-- TODO-04 Couper la base de données et rafraîchir le navigateur. Une fois chargée, que voyez-vous ? -->
     <!-- TODO-05 Relancer la base de données et rafraîchir, le status repasse à UP directement -->
@@ -33,6 +31,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>
