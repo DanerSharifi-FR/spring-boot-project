@@ -1,17 +1,26 @@
 package org.imt.tournamentmaster.model.equipe;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Equipe {
 
     @JsonIgnore
+    @Id
     private long id;
 
     private String nom;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "equipe_joueur",
+            joinColumns = @JoinColumn(name = "equipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "joueur_id")
+    )
     private List<Joueur> joueurs;
 
     public Equipe() {

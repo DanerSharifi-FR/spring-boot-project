@@ -4,22 +4,24 @@ import org.imt.tournamentmaster.model.match.Match;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
+@SpringBootTest
 public class MatchRepositoryTest {
 
     private final static Logger logger = org.slf4j.LoggerFactory.getLogger(MatchRepositoryTest.class);
 
-    // TODO-02a : Instancier correctement matchRepository pour faire compiler et passer les tests
-    // TODO-02b : Comprendre la problématique de devoir instancier plusieurs objets pour n'en tester qu'un seul
-    // TODO-02c : Comprendre l'intérêt de tester l'interface
-    private final MatchRepository matchRepository = new MatchRepositoryImpl();
+    @Autowired
+    private MatchRepository matchRepository;
 
     @Test
     public void testFindById() {
         // find a match
-        Match match = matchRepository.findById(1L);
+        Match match = matchRepository.findById(1L).get();
 
         // assert
         Assertions.assertNotNull(match);
@@ -42,11 +44,11 @@ public class MatchRepositoryTest {
     @Test
     public void testFindAll() {
         // find all matchs
-        List<Match> matchs = matchRepository.findAll();
+        List<Match> matchs = StreamSupport.stream(matchRepository.findAll().spliterator(), false).toList();
 
         // assert
         Assertions.assertNotNull(matchs);
-        Assertions.assertEquals(1, matchs.size());
+        Assertions.assertEquals(2, matchs.size());
     }
 
 }
