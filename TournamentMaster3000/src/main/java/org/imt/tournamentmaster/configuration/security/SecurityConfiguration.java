@@ -22,7 +22,17 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/**").hasRole("ADMIN")
                 .anyRequest().permitAll())
-        .httpBasic(Customizer.withDefaults());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll())
+        .exceptionHandling(exception -> exception
+                .accessDeniedPage("/403")
+        );
 
         return http.build();
     }
