@@ -79,3 +79,30 @@
 | @Scheduled | Scheduling | Tâche planifiée | `@Scheduled(fixedRate=5000)` |
 | @EnableCaching | Cache | Active le cache | `@EnableCaching` |
 | @Cacheable | Cache | Met en cache une méthode | `@Cacheable("users")` |
+
+
+---
+A faire
+
+## Fonctionnalités CRUD
+- Création d'un match (requête POST)
+- Mise à jour du statut d'un match (requête PUT)
+- Suppression d'un match (requête DELETE)
+
+## Gestion des matchs
+- Création en masse de matchs avec :
+    - Ajout du rapport (OK/KO), date, nombre d’événements, équipe gagnante, MVP, etc.
+    - Vérification pour éviter l'enregistrement de doublons
+    - Gestion des erreurs si la création du rapport échoue
+- Recherche de matchs selon différents critères (requête GET)
+
+## Gestion des utilisateurs
+- Stockage des utilisateurs en base de données via `JdbcUserDetailsManager` (Spring Security)
+- Enregistrement des utilisateurs via API ou formulaire (Spring Security)
+
+## Améliorations et monitoring
+- Ajout d’un champ date à `Match` (Data)
+- Ajout d’un `HealthIndicator` pour vérifier si aucun match n’a été joué depuis 1 mois (Actuator)
+- Ajout de métriques sur les matchs finaux lors de leur enregistrement ou au passage au statut TERMINÉ
+- Ajout de contraintes sur le format des données (numéro de joueur, nombre de joueurs par équipe, nombre de rounds par match…) via Spring Validation (JSR 303)
+- Logging des entrées et sorties de l’API sans surcharger les contrôleurs (AOP)
