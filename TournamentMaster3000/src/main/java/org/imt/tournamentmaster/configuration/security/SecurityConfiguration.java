@@ -1,5 +1,7 @@
 package org.imt.tournamentmaster.configuration.security;
 
+import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
+import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,6 +21,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.authorizeHttpRequests(authorize ->
             authorize
+                .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/**").hasRole("ADMIN")
                 .anyRequest().permitAll())

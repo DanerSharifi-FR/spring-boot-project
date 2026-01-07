@@ -14,9 +14,6 @@
         <version>4.0.0</version>
     </parent>
 
-    <!-- TODO-09 Créer un HealthIndicator personnalisé : si la base de données ne contient aucun match, afficher "DOWN" avec un message d'erreur en détail, sinon afficher "UP" avec le nombre de matchs en détail -->
-    <!-- TODO-10a Vérifier sur /actuator/health que votre HealthIndicator est bien présent -->
-    <!-- TODO-10b Vider la table match (via un "TRUNCATE TABLE `match`;" par exemple) sans couper la base de données, rafraîchir et vérifier que ça passe bien à DOWN -->
     <!-- TODO-11 BONUS Sécuriser tous les endpoints actuator sauf le /health avec le rôle ADMIN -->
 
     <dependencies>
