@@ -101,8 +101,6 @@ A faire
 - Enregistrement des utilisateurs via API ou formulaire (Spring Security)
 
 ## Améliorations et monitoring
-- Ajout d’un champ date à `Match` (Data)
-- Ajout d’un `HealthIndicator` pour vérifier si aucun match n’a été joué depuis 1 mois (Actuator)
 - Ajout de métriques sur les matchs finaux lors de leur enregistrement ou au passage au statut TERMINÉ
 - Ajout de contraintes sur le format des données (numéro de joueur, nombre de joueurs par équipe, nombre de rounds par match…) via Spring Validation (JSR 303)
 - Logging des entrées et sorties de l’API sans surcharger les contrôleurs (AOP)

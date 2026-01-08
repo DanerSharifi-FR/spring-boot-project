@@ -3,12 +3,18 @@
 Nous avons implémenté plusieurs fonctionnalités et améliorations dans l'application :
 
 ## Health Check des matchs
-- Ajout d'un **HealthIndicator** pour vérifier l’état des matchs en base de données.
+- Ajout d'un **HealthIndicator** pour surveiller l’activité des matchs.
 - Le composant `MatchHealthIndicator` :
-    - Vérifie le nombre de matchs présents dans la base.
-    - Renvoie un état `DOWN` si aucun match n’est enregistré avec un message d’erreur : "Aucun match en base de données".
-    - Renvoie un état `UP` avec le nombre de matchs si au moins un match existe.
+    - Vérifie la date du dernier match enregistré.
+    - Renvoie un état `DOWN` si **aucun match n’a été joué depuis plus d’un mois**.
+    - Renvoie un état `UP` si au moins un match a été joué durant le dernier mois.
 - Intégré avec Spring Boot Actuator pour monitorer facilement l’état de l’application.
+
+## Modèle de données
+- **Ajout d’un champ `date` à l’entité `Match`** afin de stocker la date et l’heure de déroulement d’un match.
+- Ce champ est utilisé pour :
+    - Les contrôles de santé applicatifs (HealthIndicator)
+    - Le reporting JSON
 
 ## Sécurité
 - Sécurisation de tous les endpoints Actuator :
