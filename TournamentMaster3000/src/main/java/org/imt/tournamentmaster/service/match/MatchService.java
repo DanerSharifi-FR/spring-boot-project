@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
+import java.time.LocalDateTime;
 
 @Service
 public class MatchService {
@@ -29,5 +30,10 @@ public class MatchService {
     public List<Match> getAll() {
         return StreamSupport.stream(matchRepository.findAll().spliterator(), false)
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Match> getMatchesAfter(LocalDateTime date) {
+        return matchRepository.findAllByDateAfter(date);
     }
 }
