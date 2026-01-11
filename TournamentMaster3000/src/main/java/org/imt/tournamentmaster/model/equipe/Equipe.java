@@ -2,6 +2,9 @@ package org.imt.tournamentmaster.model.equipe;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,13 +18,15 @@ public class Equipe {
 
     private String nom;
 
+    @NotEmpty
+    @Size(min = 1, max = 6)
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "equipe_joueur",
             joinColumns = @JoinColumn(name = "equipe_id"),
             inverseJoinColumns = @JoinColumn(name = "joueur_id")
     )
-    private List<Joueur> joueurs;
+    private List<@Valid Joueur> joueurs;
 
     public Equipe() {
     }

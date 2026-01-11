@@ -3,6 +3,7 @@ package org.imt.tournamentmaster.model.match;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
 
 import java.util.Objects;
 
@@ -13,10 +14,13 @@ public class Round {
     @Id
     private long id;
 
+    @Min(0)
     private int scoreA;
 
+    @Min(0)
     private int scoreB;
 
+    @Min(1)
     private int roundNumber;
 
     public Round() {

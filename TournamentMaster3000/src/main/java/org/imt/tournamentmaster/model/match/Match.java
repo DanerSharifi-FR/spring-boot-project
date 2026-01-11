@@ -2,6 +2,9 @@ package org.imt.tournamentmaster.model.match;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.List;
@@ -16,19 +19,25 @@ public class Match {
     @Id
     private long id;
 
+    @NotNull
     @ManyToOne
+    @Valid
     private Equipe equipeA;
 
+    @NotNull
     @ManyToOne
+    @Valid
     private Equipe equipeB;
 
+    @NotNull
+    @Size(min = 1, max = 5)
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "match_round",
             joinColumns = @JoinColumn(name = "match_id"),
             inverseJoinColumns = @JoinColumn(name = "round_id")
     )
-    private List<Round> rounds; // Set est un type de collection, on va éviter les confusions et appeler ça un "round"
+    private List<@Valid Round> rounds; // Set est un type de collection, on va éviter les confusions et appeler ça un "round"
 
     private Status status;
 

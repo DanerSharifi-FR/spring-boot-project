@@ -3,6 +3,9 @@ package org.imt.tournamentmaster.model.equipe;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -17,12 +20,15 @@ public class Joueur {
 
     private String prenom;
 
-    private int numero;
+    @NotNull
+    @Min(1)
+    @Max(99)
+    private Integer numero;
 
     public Joueur() {
     }
 
-    public Joueur(long id, String nom, String prenom, int numero) {
+    public Joueur(long id, String nom, String prenom, Integer numero) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -37,7 +43,7 @@ public class Joueur {
         return prenom;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
@@ -53,7 +59,7 @@ public class Joueur {
         this.prenom = prenom;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

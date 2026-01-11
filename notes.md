@@ -13,6 +13,13 @@
 `/actuator/beans` : liste des beans Spring chargés
 `/actuator/loggers` : niveau de logs à chaud
 
+Spring Validation (JSR-303) sert à :
+- garantir la cohérence métier des données
+- avant qu’elles soient utilisées (controllers / services)
+- automatiquement, via @Valid
+👉 Les annotations se mettent sur les entités,
+👉 La validation s’active dans les contrôleurs.
+
 ---
 
 | Annotation | Catégorie | Rôle | Exemple |
