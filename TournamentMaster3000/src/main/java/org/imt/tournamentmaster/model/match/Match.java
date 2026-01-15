@@ -6,6 +6,7 @@ import org.imt.tournamentmaster.model.equipe.Equipe;
 
 import java.util.List;
 import java.util.Objects;
+import java.time.LocalDateTime;
 
 // Quand cette classe est transformée en entité, il faut spécifier le nom de la table en `match` en incluant les backquotes ` car match est un mot-clé réservé en SQL
 @Entity
@@ -32,15 +33,18 @@ public class Match {
 
     private Status status;
 
+    private LocalDateTime date;
+
     public Match() {
     }
 
-    public Match(long id, Equipe equipeA, Equipe equipeB, List<Round> rounds, Status status) {
+    public Match(long id, Equipe equipeA, Equipe equipeB, List<Round> rounds, Status status, LocalDateTime date) {
         this.id = id;
         this.equipeA = equipeA;
         this.equipeB = equipeB;
         this.rounds = rounds;
         this.status = status;
+        this.date = date;
     }
 
     public long getId() {
@@ -63,6 +67,10 @@ public class Match {
         return status;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -81,6 +89,10 @@ public class Match {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public Equipe determineWinner() {
@@ -110,6 +122,7 @@ public class Match {
                 ", equipeB=" + equipeB +
                 ", rounds=" + rounds +
                 ", status=" + status +
+                ", date=" + date +
                 '}';
     }
 
@@ -118,12 +131,12 @@ public class Match {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Match match = (Match) o;
-        return id == match.id && Objects.equals(equipeA, match.equipeA) && Objects.equals(equipeB, match.equipeB) && Objects.equals(rounds, match.rounds) && status == match.status;
+        return id == match.id && Objects.equals(equipeA, match.equipeA) && Objects.equals(equipeB, match.equipeB) && Objects.equals(rounds, match.rounds) && status == match.status && Objects.equals(date, match.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, equipeA, equipeB, rounds, status);
+        return Objects.hash(id, equipeA, equipeB, rounds, status, date);
     }
 
     public enum Status {

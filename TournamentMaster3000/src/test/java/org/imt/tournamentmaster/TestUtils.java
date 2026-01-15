@@ -7,6 +7,7 @@ import org.imt.tournamentmaster.model.match.Round;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public abstract class TestUtils {
 
@@ -35,6 +36,7 @@ public abstract class TestUtils {
         rounds.add(round3);
 
         // create a match
-        return new Match(1L, equipe1, equipe2, rounds, Match.Status.TERMINE);
+        LocalDateTime matchDate = LocalDateTime.of(2026, 1, 1, 14, 0);
+        return new Match(1L, equipe1, equipe2, rounds, Match.Status.TERMINE, matchDate);
     }
 }
