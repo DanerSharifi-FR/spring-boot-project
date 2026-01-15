@@ -13,6 +13,14 @@
 `/actuator/beans` : liste des beans Spring chargés
 `/actuator/loggers` : niveau de logs à chaud
 
+
+- `DTO` Data Transfer Object.
+C’est l’objet API (ce que tu reçois/envoies en JSON). Il est séparé de tes entités JPA.
+Pourquoi c’est “propre” :
+    - tu n’exposes pas ton modèle BDD (et ses relations foireuses / EAGER / cycles JSON)
+    - tu contrôles exactement le JSON (ex: tu envoies equipeAId au lieu d’un objet Equipe)
+    - tu peux valider facilement et renvoyer des 400 propres
+
 ---
 
 | Annotation | Catégorie | Rôle | Exemple |
