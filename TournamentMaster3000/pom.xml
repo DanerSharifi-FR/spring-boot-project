@@ -20,7 +20,7 @@
     <!-- TODO-11 BONUS Sécuriser tous les endpoints actuator sauf le /health avec le rôle ADMIN -->
 
     <dependencies>
-
+ 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

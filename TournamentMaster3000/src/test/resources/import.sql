@@ -34,3 +34,9 @@ INSERT INTO match_round (match_id, round_id) VALUES (2, 6);
 
 INSERT INTO resultat (id, match_id) VALUES (1, 1);
 INSERT INTO resultat (id, match_id) VALUES (2, 2);
+
+ALTER TABLE joueur   AUTO_INCREMENT = 7;
+ALTER TABLE equipe   AUTO_INCREMENT = 3;
+ALTER TABLE round    AUTO_INCREMENT = 7;
+ALTER TABLE `match`  AUTO_INCREMENT = 3;
+ALTER TABLE resultat AUTO_INCREMENT = 3;

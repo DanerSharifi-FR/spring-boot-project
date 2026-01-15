@@ -1,20 +1,32 @@
 package org.imt.tournamentmaster.model.match;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import org.imt.tournamentmaster.model.equipe.Equipe;
-
 import java.util.List;
 import java.util.Objects;
+
+import org.imt.tournamentmaster.model.equipe.Equipe;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 // Quand cette classe est transformée en entité, il faut spécifier le nom de la table en `match` en incluant les backquotes ` car match est un mot-clé réservé en SQL
 @Entity
 @Table(name = "`match`")
 public class Match {
 
-    @JsonIgnore
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Equipe equipeA;
@@ -22,14 +34,15 @@ public class Match {
     @ManyToOne
     private Equipe equipeB;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "match_round",
-            joinColumns = @JoinColumn(name = "match_id"),
-            inverseJoinColumns = @JoinColumn(name = "round_id")
+    name = "match_round",
+    joinColumns = @JoinColumn(name = "match_id"),
+    inverseJoinColumns = @JoinColumn(name = "round_id")
     )
     private List<Round> rounds; // Set est un type de collection, on va éviter les confusions et appeler ça un "round"
 
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
 
     public Match() {
