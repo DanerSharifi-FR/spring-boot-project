@@ -5,57 +5,58 @@ import org.springframework.boot.security.autoconfigure.actuate.web.servlet.Endpo
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        http.authorizeHttpRequests(authorize ->
-            authorize
-                .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/**").hasRole("ADMIN")
-                .anyRequest().permitAll())
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        var registerPostMatcher =
+                PathPatternRequestMatcher.pathPattern(HttpMethod.POST, "/api/register");
+
+        http.authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
+                        .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
+                        .requestMatchers("/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
+                )
+                .csrf(csrf -> csrf.ignoringRequestMatchers(registerPostMatcher))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
-                        .permitAll())
+                        .permitAll()
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
-                        .permitAll())
-        .exceptionHandling(exception -> exception
-                .accessDeniedPage("/403")
-        );
+                        .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
+                );
 
         return http.build();
     }
 
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
-        UserDetails user = User.withUsername("user")
-                .password(encoder.encode("user"))
-                .roles("USER")
-                // .authorities("ROLE_USER") // équivalent au .roles("USER)
-                .build();
-
-                UserDetails admin = User.withUsername("admin")
-                .password(encoder.encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+    @Bean
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 }
