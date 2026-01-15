@@ -1,0 +1,10 @@
+- Respecter les conventions Spring Boot (starters, auto-config, structure standard).
+- DI : injection par constructeur uniquement, jamais de field injection.
+- Config : application*.properties + profils (dev/test), pas de valeurs hardcodées, placeholders sûrs.
+- Web : controllers fins, services épais, DTO si besoin.
+- Data JPA : repositories via JpaRepository, config par properties.
+- Transactions : @Transactional au niveau service.
+- Security : SecurityFilterChain clair + tests stables.
+- Actuator : endpoints exposés minimalement + sécurisés.
+- AOP : un seul aspect utile, simple, sans casser transactions/sécurité.
+- Travail : chercher avec `rg`, modifier avec `apply_patch`, exécuter `mvn test` avant de conclure.
