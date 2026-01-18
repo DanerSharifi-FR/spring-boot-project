@@ -1,0 +1,1656 @@
+type: collection.insomnia.rest/5.0
+name: TournamentMaster3000 - Tests API (sans variables)
+meta:
+  id: wrk_59fde7460c73484bac506ce4
+  created: 1768481107256
+  modified: 1768481107256
+  description: 'Collection Insomnia v5 sans variables d''environnement. URLs + credentials
+    en dur. Users: user/user, admin/admin.'
+collection:
+- url: http://localhost:8080/
+  name: Home - GET /
+  meta:
+    id: req_f214c324046d4c4eab0dc74a
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 'Endpoint public (pas d''auth). Doit renvoyer: "Bienvenue dans Tournament
+      Master!"'
+    sortKey: -3000
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/actuator/health
+  name: Actuator - GET /health
+  meta:
+    id: req_ce1ce755771942dbb303b773
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Endpoint public. DOWN si aucun match en base (MatchHealthIndicator).
+    sortKey: -2900
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/actuator
+  name: Actuator - GET / (liste endpoints)
+  meta:
+    id: req_34f3f2bceef54131b27d043a
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Liste des endpoints exposés (management.endpoints.web.exposure.include=*).
+    sortKey: -2880
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/actuator/metrics
+  name: Actuator - GET /metrics
+  meta:
+    id: req_5ff906ad41bd4567bcca5c6f
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Liste des métriques disponibles.
+    sortKey: -2860
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/actuator/metrics/http.server.requests
+  name: Actuator - GET /metrics/http.server.requests
+  meta:
+    id: req_3654e7f2ee2541f39226968e
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Métrique des requêtes HTTP.
+    sortKey: -2840
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/compte/whoami
+  name: Compte - GET /whoami (sans auth => 403)
+  meta:
+    id: req_8ed2899f12f74d6a8caad678
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '@PreAuthorize(isAuthenticated()). Sans auth => 403.'
+    sortKey: -2700
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/compte/whoami
+  name: Compte - GET /whoami (USER => 200)
+  meta:
+    id: req_63b4b354488b4401a478a971
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Doit renvoyer "user".
+    sortKey: -2680
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: &id001
+    type: basic
+    useISO88591: false
+    disabled: false
+    username: user
+    password: user
+- url: http://localhost:8080/compte/whoami
+  name: Compte - GET /whoami (ADMIN => 200)
+  meta:
+    id: req_7d686ba65b5646b8beed884c
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Doit renvoyer "admin".
+    sortKey: -2660
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: &id002
+    type: basic
+    useISO88591: false
+    disabled: false
+    username: admin
+    password: admin
+- url: http://localhost:8080/compte/secret
+  name: Compte - GET /secret (sans auth => 403)
+  meta:
+    id: req_d8e230465da94c6a9b882ba5
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: hasRole('ADMIN') && username == 'admin'. Sans auth => 403.
+    sortKey: -2640
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/compte/secret
+  name: Compte - GET /secret (USER => 403)
+  meta:
+    id: req_b6ed5c10b64245d9a447c6d9
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: USER => 403.
+    sortKey: -2620
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/compte/secret
+  name: Compte - GET /secret (ADMIN => 200)
+  meta:
+    id: req_ca80d23fd4f84e46a035c39e
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Doit renvoyer "This is a secret admin page!"
+    sortKey: -2600
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/match
+  name: Security - GET /api/match (sans auth => 401)
+  meta:
+    id: req_a1a2fd2cf0a246b6bdb18095
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: Sans credentials => 401 (HTTP Basic).
+    sortKey: -2500
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+- url: http://localhost:8080/api/joueur
+  name: Security - POST /api/joueur (USER => 403)
+  meta:
+    id: req_1a5fdeb2873e49f7a3858ad8
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: POST /api/** réservé ADMIN. USER => 403.
+    sortKey: -2480
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+  body:
+    mimeType: application/json
+    text: '{ "id": 9001, "nom": "Test", "prenom": "User", "numero": 1 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST create (ADMIN) id=9001
+  meta:
+    id: req_cbb7d28b08a44c86bc53156d
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 201. Si déjà existant => 409.
+    sortKey: -2300
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9001, "nom": "Durand", "prenom": "Alex", "numero": 7 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST create (ADMIN) id=9002
+  meta:
+    id: req_0fb5ec841b934914b145ecbc
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 201. Si déjà existant => 409.
+    sortKey: -2299
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9002, "nom": "Martin", "prenom": "Sam", "numero": 12 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST create (ADMIN) id=9003
+  meta:
+    id: req_f924ac9d58804b428a487624
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 201. Si déjà existant => 409.
+    sortKey: -2298
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9003, "nom": "Bernard", "prenom": "Lina", "numero": 3 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST create (ADMIN) id=9004
+  meta:
+    id: req_008e31b91b6b4104a7e45e9c
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 201. Si déjà existant => 409.
+    sortKey: -2297
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9004, "nom": "Petit", "prenom": "Noah", "numero": 9 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - GET all (USER)
+  meta:
+    id: req_831336a139954a51a5ebc1e5
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '200.'
+    sortKey: -2200
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/joueur/9001
+  name: Joueur - GET by id=9001 (USER)
+  meta:
+    id: req_0750c928adc74b1d98717a39
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -2180
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/joueur/9001
+  name: Joueur - PUT update (ADMIN) id=9001
+  meta:
+    id: req_2d9476f1f78143a7a56d7dc8
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -2160
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "Durand", "prenom": "Alexis", "numero": 17 }'
+- url: http://localhost:8080/api/joueur/9004
+  name: Joueur - DELETE (ADMIN) id=9004
+  meta:
+    id: req_18a7e70c63eb4e3498b848cd
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 204 si existe, sinon 404.
+    sortKey: -2140
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/joueur/9004
+  name: Joueur - GET by id=9004 (USER) attendu 404
+  meta:
+    id: req_7439eefa6bd249b7b958d6d5
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 404 après suppression.
+    sortKey: -2130
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST (ADMIN) 400 id manquant
+  meta:
+    id: req_59d0a94031a740b39a753165
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (id obligatoire en création).
+    sortKey: -2100
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "X", "prenom": "Y", "numero": 1 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST (ADMIN) 400 nom vide
+  meta:
+    id: req_28e16aaef2b442e8bf0d9a55
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (nom obligatoire).
+    sortKey: -2080
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9010, "nom": "   ", "prenom": "Y", "numero": 1 }'
+- url: http://localhost:8080/api/joueur
+  name: Joueur - POST (ADMIN) 409 duplicate id=9001
+  meta:
+    id: req_5fc23c255d7a4fe2aec2bad7
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 409 (déjà existant).
+    sortKey: -2060
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9001, "nom": "Dup", "prenom": "Dup", "numero": 99 }'
+- url: http://localhost:8080/api/joueur/999999
+  name: Joueur - PUT (ADMIN) 404 id=999999
+  meta:
+    id: req_49566668243b4e97b4260df4
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -2040
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "X", "prenom": "Y", "numero": 1 }'
+- url: http://localhost:8080/api/joueur/999999
+  name: Joueur - DELETE (ADMIN) 404 id=999999
+  meta:
+    id: req_32dd0adb47b84e40b7e7666a
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -2020
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST create (ADMIN) id=9101
+  meta:
+    id: req_c2c668816ec0410c82458262
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '201. Prérequis: joueurs 9001/9002.'
+    sortKey: -1900
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9101, "nom": "Team Alpha", "joueurIds": [9001, 9002] }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST create (ADMIN) id=9102
+  meta:
+    id: req_2f6c3e2f7570446dac035db6
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '201. Prérequis: joueurs 9003/9004 (si 9004 supprimé, recrée-le).'
+    sortKey: -1880
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9102, "nom": "Team Beta", "joueurIds": [9003, 9004] }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - GET all (USER)
+  meta:
+    id: req_a514bf932ad34d2a8690104b
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '200.'
+    sortKey: -1860
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/equipe/9101
+  name: Equipe - GET by id=9101 (USER)
+  meta:
+    id: req_b284f17e26da47669a518909
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1840
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/equipe/9101
+  name: Equipe - PUT update (ADMIN) id=9101
+  meta:
+    id: req_7abd9fd867bf4be18a407adf
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1820
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "Team Alpha (v2)", "joueurIds": [9001] }'
+- url: http://localhost:8080/api/equipe/9102
+  name: Equipe - DELETE (ADMIN) id=9102
+  meta:
+    id: req_d87af12bf2eb418482c25fb7
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '204 si existe. Si équipe référencée par un match: possible erreur
+      DB.'
+    sortKey: -1800
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST (ADMIN) 400 id manquant
+  meta:
+    id: req_113b9125827f401a960229ea
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (id obligatoire en création).
+    sortKey: -1760
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "NoId", "joueurIds": [] }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST (ADMIN) 400 nom manquant
+  meta:
+    id: req_7234ff11b4ca4b3ba1268de2
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (nom obligatoire).
+    sortKey: -1740
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9200, "joueurIds": [] }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST (ADMIN) 400 joueurIds manquant
+  meta:
+    id: req_e5c92f8fb9d740989e35eb06
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (joueurIds obligatoire).
+    sortKey: -1720
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9201, "nom": "NoPlayers" }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST (ADMIN) 404 joueur introuvable
+  meta:
+    id: req_90fe6fc478744744b85a32fa
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 404 (Joueur introuvable).
+    sortKey: -1700
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9202, "nom": "BadPlayer", "joueurIds": [999999] }'
+- url: http://localhost:8080/api/equipe
+  name: Equipe - POST (ADMIN) 409 duplicate id=9101
+  meta:
+    id: req_aa3f241ae947460e843464c8
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 409 (déjà existante).
+    sortKey: -1680
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "id": 9101, "nom": "Dup", "joueurIds": [] }'
+- url: http://localhost:8080/api/equipe/999999
+  name: Equipe - PUT (ADMIN) 404 id=999999
+  meta:
+    id: req_d3a9edb12f0e461ba2932c54
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -1660
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "nom": "X", "joueurIds": [] }'
+- url: http://localhost:8080/api/equipe/999999
+  name: Equipe - DELETE (ADMIN) 404 id=999999
+  meta:
+    id: req_8208cd2ad55c470fa29ce02b
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -1640
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/round
+  name: Round - GET all (USER)
+  meta:
+    id: req_ea52ed4b4f504ad889dccf55
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '200.'
+    sortKey: -1500
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/round
+  name: Round - POST create (ADMIN)
+  meta:
+    id: req_3373169ed4854ab2a613fea7
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 201 (id auto).
+    sortKey: -1480
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "scoreA": 13, "scoreB": 9, "roundNumber": 1 }'
+- url: http://localhost:8080/api/round/max/13
+  name: Round - GET /max/13 (USER)
+  meta:
+    id: req_09f2ce0178c448cd952a8f08
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '200.'
+    sortKey: -1460
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/round/1
+  name: Round - GET by id=1 (USER) (si existe)
+  meta:
+    id: req_9fd53813b1994495976ef5ca
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1440
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/round/1
+  name: Round - PUT update id=1 (ADMIN) (si existe)
+  meta:
+    id: req_069d4c57c705465b9ea0847a
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1420
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "scoreA": 10, "scoreB": 13, "roundNumber": 2 }'
+- url: http://localhost:8080/api/round/1
+  name: Round - DELETE id=1 (ADMIN) (si existe)
+  meta:
+    id: req_504f5498a4424e4ea4f3842f
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 204 si existe, sinon 404.
+    sortKey: -1400
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/round
+  name: Round - POST (ADMIN) 400 champs manquants
+  meta:
+    id: req_ed762385bc264799adbb7a16
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1380
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "scoreA": 13 }'
+- url: http://localhost:8080/api/round/999999
+  name: Round - PUT (ADMIN) 404 id=999999
+  meta:
+    id: req_ffe7061a4fa2448a86431570
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -1360
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "scoreA": 1, "scoreB": 2, "roundNumber": 1 }'
+- url: http://localhost:8080/api/round/999999
+  name: Round - DELETE (ADMIN) 404 id=999999
+  meta:
+    id: req_a6193947b65f45c9b222e399
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -1340
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/match
+  name: Match - GET all (USER)
+  meta:
+    id: req_39f25141e0c84418b7e47d48
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '200.'
+    sortKey: -1200
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/match
+  name: Match - POST create (ADMIN) (équipes 9101/9102)
+  meta:
+    id: req_7bdc0fec9c3748989587df59
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '201. Prérequis: équipes 9101/9102.'
+    sortKey: -1180
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: "{\n  \"equipeAId\": 9101,\n  \"equipeBId\": 9102,\n  \"status\": \"NOUVEAU\"\
+      ,\n  \"rounds\": [\n    { \"scoreA\": 13, \"scoreB\": 9,  \"roundNumber\": 1\
+      \ },\n    { \"scoreA\": 10, \"scoreB\": 13, \"roundNumber\": 2 },\n    { \"\
+      scoreA\": 13, \"scoreB\": 11, \"roundNumber\": 3 }\n  ]\n}"
+- url: http://localhost:8080/api/match/1
+  name: Match - GET by id=1 (USER) (si existe)
+  meta:
+    id: req_ec74edbde8e44cf487982b31
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1160
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/match/1
+  name: Match - PUT update id=1 (ADMIN) (si existe)
+  meta:
+    id: req_412fe6fe39f0458abaa4f459
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 200 si existe, sinon 404.
+    sortKey: -1140
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: "{\n  \"equipeAId\": 9101,\n  \"equipeBId\": 9102,\n  \"status\": \"EN_COURS\"\
+      ,\n  \"rounds\": [\n    { \"scoreA\": 13, \"scoreB\": 7,  \"roundNumber\": 1\
+      \ },\n    { \"scoreA\": 13, \"scoreB\": 11, \"roundNumber\": 2 }\n  ]\n}"
+- url: http://localhost:8080/api/match/1
+  name: Match - DELETE id=1 (ADMIN) (si existe)
+  meta:
+    id: req_0d53f6a0e9f242c58f8889df
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 204 si existe, sinon 404.
+    sortKey: -1120
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/match/99999999
+  name: Match - GET by id=99999999 (USER) attendu 404
+  meta:
+    id: req_7ee5a6a9949e43c5b32bc2f8
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -1110
+  method: GET
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id001
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 body manquant
+  meta:
+    id: req_a21aa2c8fa1848c8a72de28c
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 400 (Body JSON manquant).
+    sortKey: -1050
+  method: POST
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 equipeAId manquant
+  meta:
+    id: req_3b06efce4f7247619ec23bb1
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1040
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeBId": 9102, "status": "NOUVEAU", "rounds": [ { "scoreA": 13, "scoreB":
+      11, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 status manquant
+  meta:
+    id: req_a90f9249e732417ebd3a32ef
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1030
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "rounds": [ { "scoreA": 13, "scoreB":
+      11, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 equipes identiques
+  meta:
+    id: req_7bfea6ba9368436aa7c10e58
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1020
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9101, "status": "NOUVEAU", "rounds":
+      [ { "scoreA": 13, "scoreB": 11, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 rounds vides
+  meta:
+    id: req_1f438f4bd0b64f39b8f87a7e
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1010
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "status": "NOUVEAU", "rounds":
+      [] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 égalité dans un round
+  meta:
+    id: req_1101be0762424000bb054f8a
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -1000
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "status": "NOUVEAU", "rounds":
+      [ { "scoreA": 12, "scoreB": 12, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 roundNumber dupliqué
+  meta:
+    id: req_a8522d9d5fe24cb4bf4c8bb4
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -990
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "status": "NOUVEAU", "rounds":
+      [ { "scoreA": 13, "scoreB": 9, "roundNumber": 1 }, { "scoreA": 13, "scoreB":
+      11, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 400 round incomplet
+  meta:
+    id: req_568b9ec9fd2b457ca7e67ccb
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '400.'
+    sortKey: -980
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "status": "NOUVEAU", "rounds":
+      [ { "scoreA": 13, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match
+  name: Match - POST (ADMIN) 404 équipe introuvable
+  meta:
+    id: req_483e890599e249ba943dd5ae
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: 404 (Equipe A introuvable).
+    sortKey: -970
+  method: POST
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 999999, "equipeBId": 9102, "status": "NOUVEAU", "rounds":
+      [ { "scoreA": 13, "scoreB": 11, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match/99999999
+  name: Match - PUT (ADMIN) 404 id=99999999
+  meta:
+    id: req_715ad030aa3e451f9f2374da
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -960
+  method: PUT
+  headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+  body:
+    mimeType: application/json
+    text: '{ "equipeAId": 9101, "equipeBId": 9102, "status": "EN_COURS", "rounds":
+      [ { "scoreA": 13, "scoreB": 7, "roundNumber": 1 } ] }'
+- url: http://localhost:8080/api/match/99999999
+  name: Match - DELETE (ADMIN) 404 id=99999999
+  meta:
+    id: req_498b29d3dfae47539f0668a5
+    created: 1768481107256
+    modified: 1768481107256
+    isPrivate: false
+    description: '404.'
+    sortKey: -950
+  method: DELETE
+  headers:
+  - name: User-Agent
+    value: insomnia/12.0.0
+  settings:
+    renderRequestBody: true
+    encodeUrl: true
+    followRedirects: global
+    cookies:
+      send: true
+      store: true
+    rebuildPath: true
+  authentication: *id002
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_0bc4c0e5371f4481a42f629f
+    created: 1768481107256
+    modified: 1768481107256
