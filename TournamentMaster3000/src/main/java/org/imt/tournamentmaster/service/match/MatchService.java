@@ -1,5 +1,6 @@
 package org.imt.tournamentmaster.service.match;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -173,5 +174,10 @@ public class MatchService {
         }
 
         return res;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Match> getMatchesAfter(LocalDateTime date) {
+        return matchRepository.findAllByDateAfter(date);
     }
 }

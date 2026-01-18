@@ -52,6 +52,7 @@ CREATE TABLE `match`
     equipea_id BIGINT   NULL,
     equipeb_id BIGINT   NULL,
     status     SMALLINT NULL,
+    date       TIMESTAMP NULL,
     CONSTRAINT pk_match PRIMARY KEY (id)
 );
 
@@ -94,3 +95,19 @@ ALTER TABLE resultat
     ADD CONSTRAINT fk_resultat_on_match
         FOREIGN KEY (match_id) REFERENCES `match` (id)
         ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS users
+(
+    username VARCHAR(50) NOT NULL PRIMARY KEY,
+    password VARCHAR(500) NOT NULL,
+    enabled BOOLEAN NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS authorities
+(
+    username VARCHAR(50) NOT NULL,
+    authority VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users (username)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS ix_auth_username ON authorities (username, authority);

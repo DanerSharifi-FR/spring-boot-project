@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 public class MatchRepositoryTest {
@@ -37,6 +38,9 @@ public class MatchRepositoryTest {
         Assertions.assertEquals(3, match.getRounds().size());
 
         Assertions.assertEquals(Match.Status.TERMINE, match.getStatus());
+
+        LocalDateTime matchDate = LocalDateTime.of(2026, 1, 1, 14, 0);
+        Assertions.assertEquals(matchDate, match.getDate());
 
         Assertions.assertEquals(match.getEquipeA(), match.determineWinner());
     }
